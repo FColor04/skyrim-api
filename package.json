@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API for skyrim items, enemies, cities and more!",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js"
   },
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/FColor04/skyrim-api#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "chalk": "^5.0.1",
     "cheerio": "^1.0.0-rc.12",
     "express": "^4.18.1",
     "nodemon": "^2.0.19"
