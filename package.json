@@ -1,0 +1,34 @@
+{
+  "name": "skyrim-api",
+  "version": "1.0.0",
+  "description": "API for skyrim items, enemies, cities and more!",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FColor04/skyrim-api.git"
+  },
+  "keywords": [
+    "API",
+    "skyrim",
+    "the",
+    "elder",
+    "scrolls",
+    "V",
+    "tesv"
+  ],
+  "author": "FColor04",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/FColor04/skyrim-api/issues"
+  },
+  "homepage": "https://github.com/FColor04/skyrim-api#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
