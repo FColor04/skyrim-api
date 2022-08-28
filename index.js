@@ -9,12 +9,13 @@ const PORT = process.env.PORT || 8000;
 const SOURCEURL = "https://elderscrolls.fandom.com";
 
 const app = express();
+app.listen(PORT, () => console.log(`Skyrim API listening on port :${PORT}`));
 
 app.get("/", (req, res) => {
    res.sendFile(path.join(process.cwd(), '/index.html'));
 });
 
-ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Items").then(async res => {
+await ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Items").then(async res => {
     const itemsCache = [];
     await Promise.all(res.map(async (itemUrl, i) => {
         //Load each item's site for further scraping of name, description etc.
@@ -45,7 +46,7 @@ ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Ite
         res.json(itemsCache);
     });
 });
-ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Books").then(async res => {
+await ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Books").then(async res => {
     const bookCache = [];
     await Promise.all(res.map(async (bookUrl, i) => {
         bookUrl = SOURCEURL + bookUrl;
@@ -69,6 +70,9 @@ ScrapeCategoryForUrls("https://elderscrolls.fandom.com/wiki/Category:Skyrim:_Boo
         if(bookData.weight !== 0)
             bookCache.push(bookData);
     }));
+    bookCache.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(chalk.green("Books loading done!"))
+    app.get("/items", (req, res) => {
+        res.json(bookCache);
+    });
 });
-
-app.listen(PORT, () => console.log(`Skyrim API listening on port :${PORT}`))
